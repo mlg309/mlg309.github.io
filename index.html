@@ -3,82 +3,518 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Michael Gil's personal portfolio website.">
-  <title>Michael Gil | Portfolio</title>
+  <meta name="description" content="Michael Gil — Rutgers Business School finance student portfolio featuring skills, investment analysis, real estate, and digital infrastructure projects.">
+  <title>Michael Gil | Finance Portfolio</title>
+
+  <style>
+    :root {
+      --navy: #0b1f33;
+      --navy-light: #173a5e;
+      --blue: #2d6fa3;
+      --blue-soft: #eaf2f8;
+      --text: #17202a;
+      --muted: #5f6b76;
+      --line: #dfe6ec;
+      --white: #ffffff;
+      --off-white: #f7f9fb;
+      --shadow: 0 12px 30px rgba(11, 31, 51, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--white);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .container {
+      width: min(1100px, 90%);
+      margin: 0 auto;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.96);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(10px);
+    }
+
+    .nav-inner {
+      min-height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--navy);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--muted);
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus {
+      color: var(--blue);
+    }
+
+    header {
+      background:
+        radial-gradient(circle at 85% 20%, rgba(45, 111, 163, 0.18), transparent 28%),
+        linear-gradient(135deg, #07182a 0%, #0b1f33 55%, #153b5f 100%);
+      color: var(--white);
+      padding: 88px 0;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.45fr 0.55fr;
+      align-items: center;
+      gap: 64px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      color: #b9d8ee;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-size: 0.78rem;
+      margin-bottom: 14px;
+    }
+
+    h1 {
+      font-size: clamp(3rem, 7vw, 5.2rem);
+      line-height: 0.98;
+      letter-spacing: -0.045em;
+      margin-bottom: 22px;
+    }
+
+    .hero-statement {
+      max-width: 720px;
+      font-size: clamp(1.12rem, 2vw, 1.35rem);
+      line-height: 1.65;
+      color: #e3edf5;
+    }
+
+    .hero-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 11px 18px;
+      border-radius: 7px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.92rem;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .button-primary {
+      background: var(--white);
+      color: var(--navy);
+    }
+
+    .button-secondary {
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      color: var(--white);
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+    }
+
+    .headshot-wrap {
+      display: flex;
+      justify-content: center;
+    }
+
+    .headshot {
+      width: min(280px, 100%);
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      object-position: center top;
+      border-radius: 50%;
+      border: 6px solid rgba(255, 255, 255, 0.18);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+    }
+
+    section {
+      padding: 84px 0;
+      scroll-margin-top: 70px;
+    }
+
+    section:nth-of-type(even) {
+      background: var(--off-white);
+    }
+
+    .section-label {
+      color: var(--blue);
+      font-weight: 800;
+      font-size: 0.78rem;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    h2 {
+      color: var(--navy);
+      font-size: clamp(2rem, 4vw, 2.7rem);
+      line-height: 1.15;
+      letter-spacing: -0.025em;
+      margin-bottom: 18px;
+    }
+
+    .section-intro {
+      max-width: 760px;
+      color: var(--muted);
+      font-size: 1.05rem;
+      margin-bottom: 38px;
+    }
+
+    .about-card {
+      border-left: 4px solid var(--blue);
+      padding: 8px 0 8px 24px;
+      max-width: 900px;
+      font-size: 1.18rem;
+      color: #34414d;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .skill-group {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 26px;
+      box-shadow: var(--shadow);
+    }
+
+    .skill-group h3 {
+      color: var(--navy);
+      font-size: 1.05rem;
+      margin-bottom: 16px;
+    }
+
+    .skill-list {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+    }
+
+    .skill-list li {
+      background: var(--blue-soft);
+      color: #244e6f;
+      border-radius: 999px;
+      padding: 7px 11px;
+      font-size: 0.87rem;
+      font-weight: 600;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .project-card {
+      display: flex;
+      flex-direction: column;
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 28px;
+      box-shadow: var(--shadow);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 18px 38px rgba(11, 31, 51, 0.12);
+    }
+
+    .project-number {
+      color: var(--blue);
+      font-weight: 800;
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      margin-bottom: 13px;
+    }
+
+    .project-card h3 {
+      color: var(--navy);
+      font-size: 1.25rem;
+      line-height: 1.3;
+      margin-bottom: 13px;
+    }
+
+    .project-card p {
+      color: var(--muted);
+      font-size: 0.96rem;
+      flex-grow: 1;
+    }
+
+    .project-reference {
+      margin-top: 22px;
+      padding-top: 16px;
+      border-top: 1px solid var(--line);
+      color: var(--blue);
+      font-size: 0.88rem;
+      font-weight: 700;
+    }
+
+    footer {
+      background: var(--navy);
+      color: #cbd8e3;
+      text-align: center;
+      padding: 32px 20px;
+      font-size: 0.9rem;
+    }
+
+    footer strong {
+      color: var(--white);
+    }
+
+    @media (max-width: 800px) {
+      .hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .hero-statement {
+        margin-inline: auto;
+      }
+
+      .hero-links {
+        justify-content: center;
+      }
+
+      .headshot-wrap {
+        grid-row: 1;
+      }
+
+      .headshot {
+        width: 210px;
+      }
+
+      .skills-grid,
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .nav-inner {
+        flex-direction: column;
+        justify-content: center;
+        padding: 14px 0;
+      }
+
+      .nav-links {
+        gap: 18px;
+      }
+
+      header {
+        padding: 58px 0 68px;
+      }
+
+      section {
+        padding: 64px 0;
+      }
+    }
+  </style>
 </head>
 
 <body>
-  <header>
-    <h1>Michael Gil</h1>
-    <p>Finance student at Rutgers Business School with experience in real estate acquisitions and AI/HPC data center infrastructure.</p>
+  <nav aria-label="Main navigation">
+    <div class="container nav-inner">
+      <a class="brand" href="#top">MG</a>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+      </ul>
+    </div>
+  </nav>
 
-    <nav>
-      <a href="#about">About</a>
-      <a href="#skills">Skills</a>
-      <a href="#projects">Projects</a>
-    </nav>
+  <header id="top">
+    <div class="container hero">
+      <div>
+        <span class="eyebrow">Finance • Real Estate • Digital Infrastructure</span>
+        <h1>Michael Gil</h1>
+        <p class="hero-statement">
+          Rutgers Business School finance student with hands-on experience in real estate acquisitions,
+          investment analysis, and AI/HPC digital infrastructure.
+        </p>
+
+        <div class="hero-links">
+          <a class="button button-primary" href="#projects">View Projects</a>
+          <a class="button button-secondary" href="#skills">Explore Skills</a>
+        </div>
+      </div>
+
+      <div class="headshot-wrap">
+        <img
+          class="headshot"
+          src="michael.gil_headshot.png"
+          alt="Professional headshot of Michael Gil"
+        >
+      </div>
+    </div>
   </header>
 
   <main>
     <section id="about">
-      <h2>Personal Statement</h2>
-      <p>
-        I am a Rutgers Business School finance student interested in investment analysis,
-        real estate, and digital infrastructure, with hands-on experience evaluating
-        investment opportunities and supporting business development.
-      </p>
+      <div class="container">
+        <p class="section-label">Personal Statement</p>
+        <h2>Building experience across finance and investing.</h2>
+        <p class="about-card">
+          I am a Rutgers Business School finance student interested in investment analysis, real estate,
+          and digital infrastructure, with experience evaluating opportunities and supporting
+          acquisition and business development decisions.
+        </p>
+      </div>
     </section>
 
     <section id="skills">
-      <h2>Skills</h2>
-      <ul>
-        <li>Financial Analysis</li>
-        <li>Real Estate Underwriting</li>
-        <li>Investment Research</li>
-        <li>Comparable Property Analysis</li>
-        <li>NOI &amp; Cap Rate Analysis</li>
-        <li>Market Research</li>
-        <li>Microsoft Excel</li>
-        <li>PowerPoint</li>
-        <li>Business Development</li>
-        <li>AI/HPC &amp; Data Center Market Research</li>
-      </ul>
+      <div class="container">
+        <p class="section-label">Skills</p>
+        <h2>What I bring to the table.</h2>
+        <p class="section-intro">
+          A combination of financial analysis, market research, and client-facing experience developed
+          through real estate, infrastructure, and business development work.
+        </p>
+
+        <div class="skills-grid">
+          <div class="skill-group">
+            <h3>Finance &amp; Investment</h3>
+            <ul class="skill-list">
+              <li>Financial Analysis</li>
+              <li>Real Estate Underwriting</li>
+              <li>NOI Analysis</li>
+              <li>Cap Rate Analysis</li>
+              <li>Comparable Analysis</li>
+              <li>Acquisition Screening</li>
+            </ul>
+          </div>
+
+          <div class="skill-group">
+            <h3>Research &amp; Strategy</h3>
+            <ul class="skill-list">
+              <li>Investment Research</li>
+              <li>Market Research</li>
+              <li>Company Research</li>
+              <li>Digital Infrastructure</li>
+              <li>AI/HPC Market Analysis</li>
+              <li>Business Development</li>
+            </ul>
+          </div>
+
+          <div class="skill-group">
+            <h3>Tools &amp; Communication</h3>
+            <ul class="skill-list">
+              <li>Microsoft Excel</li>
+              <li>PowerPoint</li>
+              <li>CoStar</li>
+              <li>Crexi</li>
+              <li>Reonomy</li>
+              <li>Professional Outreach</li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </section>
 
     <section id="projects">
-      <h2>Projects</h2>
-
-      <article>
-        <h3>Sydney AI/HPC Data Center Market Analysis</h3>
-        <p>
-          Researched potential GPU cloud providers, infrastructure operators, and investors
-          for a Sydney AI/HPC data center opportunity. Evaluated potential partners based on
-          deployment requirements, market presence, capacity needs, and strategic fit.
+      <div class="container">
+        <p class="section-label">Projects</p>
+        <h2>Selected work.</h2>
+        <p class="section-intro">
+          Examples of analytical and research work completed through professional experiences and
+          project-based assignments.
         </p>
-      </article>
 
-      <article>
-        <h3>Real Estate Acquisition Analysis</h3>
-        <p>
-          Evaluated commercial and mixed-use acquisition opportunities using property
-          financials, NOI, cap rates, comparable properties, and market research to support
-          acquisition screening and investment discussions.
-        </p>
-      </article>
+        <div class="projects-grid">
+          <article class="project-card">
+            <p class="project-number">PROJECT 01</p>
+            <h3>Sydney AI/HPC Data Center Market Analysis</h3>
+            <p>
+              Researched GPU cloud providers, infrastructure operators, and potential partners for a
+              Sydney AI/HPC data center opportunity. Evaluated market presence, deployment requirements,
+              capacity needs, and strategic fit for approximately 1 MW of infrastructure.
+            </p>
+            <p class="project-reference">Professional Project • Blockmate</p>
+          </article>
 
-      <article>
-        <h3>Investment &amp; Company Research</h3>
-        <p>
-          Conducted company and industry research to evaluate business models, market
-          opportunities, competitive positioning, and potential investment considerations
-          across real estate, finance, and technology-related sectors.
-        </p>
-      </article>
+          <article class="project-card">
+            <p class="project-number">PROJECT 02</p>
+            <h3>Commercial Real Estate Acquisition Analysis</h3>
+            <p>
+              Screened commercial and mixed-use acquisition opportunities using property financials,
+              NOI, cap rates, comparable properties, and market research to support valuation and
+              acquisition discussions on opportunities ranging above $1 million.
+            </p>
+            <p class="project-reference">Professional Project • ArkinPoint</p>
+          </article>
+
+          <article class="project-card">
+            <p class="project-number">PROJECT 03</p>
+            <h3>Investment &amp; Company Research</h3>
+            <p>
+              Conducted company and industry research across finance, real estate, and technology-related
+              sectors, focusing on business models, market opportunities, competitive positioning, and
+              factors relevant to investment decisions.
+            </p>
+            <p class="project-reference">Research Project • Finance</p>
+          </article>
+        </div>
+      </div>
     </section>
   </main>
 
   <footer>
-    <p>&copy; 2026 Michael Gil</p>
+    <p><strong>Michael Gil</strong> &nbsp;•&nbsp; Rutgers Business School &nbsp;•&nbsp; Finance</p>
   </footer>
 </body>
 </html>
